@@ -1,0 +1,2 @@
+<h1><?php echo $content ?></h1>
+<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque error atque dolorem tempore fugiat totam, nihil, similique perferendis voluptate cumque magnam aperiam porro. Dicta ducimus rerum maiores enim sapiente aliquam.</div>
