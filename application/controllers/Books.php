@@ -103,7 +103,30 @@ class Books extends CI_Controller{
 		$this->form_validation->set_rules($config);
 
 
-		if ($this->form_validation->run() === FALSE) {
+
+//-------------------------------------------------------
+
+//-------------------------------------------------------
+		$gRecaptchaResponse = 
+		$remoteIp = 
+
+		$this->load->library('recaptchaResponse');
+		$this->load->library('recaptcha');
+
+		$this->recaptcha->init("6LecCSMUAAAAALH7sOUGR66ZYeCwRgMCXnOfwbMz");
+
+		$resp = $this->recaptcha->verify($gRecaptchaResponse, $remoteIp);
+// if ($resp->isSuccess()) {
+//     echo "Nao e uma maquina";
+// } else {
+// 	echo "es una maquina";
+//     // $errors = $resp->getErrorCodes();
+// }
+
+
+
+
+		if ($this->form_validation->run() === FALSE && !$resp->isSuccess()) {
 			//echo "hay un error";
 			$data['editoras'] = $this->Editora_model->getAll(); 
 			$data['autores'] =$this->Author_model->getAll();

@@ -50,6 +50,13 @@
 					</select>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-lg-2 control-label">Preencha o Capcha</label>
+				<div class="col-lg-10">
+					<div class="g-recaptcha" data-sitekey="6LecCSMUAAAAAJHVE-bTmWV4_1JkA-KpvF0gB27f"></div>
+				</div>
+			</div>
 			<?php echo form_error('editora'); ?>
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">

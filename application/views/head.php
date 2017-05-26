@@ -6,6 +6,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/theme-yeti.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
