@@ -2,3 +2,38 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+#Desativar assinatura do servidor
+ServerSignature Off
+
+#impedir acceso a ficheiros de configuracao
+
+
+#Impedir Browsing de diretorios
+#Options -Indexes
+#AllowOverride All
+
+#Bloquear Acesso a Pasta Com Pass
+
+#AuthType Basic
+#AuthName "Password Required"
+#AuthUserFile "C:\Users\Turma A\Documents\dev\xampp\htdocs\codeigniter\.htpasswd"
+#Require valid-user
+
+#Bloquear Pasta
+
+#<Directory "C:\Users\Turma A\Documents\dev\xampp\htdocs\codeigniter\assets">
+#Order Deny,Allow
+#deny from all
+#allow from 127.0.0.1
+#<Directory>
+
+#Bloqueio de ficheiros .ht
+#<FilesMatch .ht*>
+#AuthName "Login para consultar"
+#AuthType Basic
+#AuthUserFile "C:\Users\Turma A\Documents\dev\xampp\htdocs\codeigniter\assets\files\.htpasswd"
+#require valid-user
+#</FilesMatch>
+

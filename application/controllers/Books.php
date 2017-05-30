@@ -9,10 +9,13 @@ class Books extends CI_Controller{
 		$this->load->model('Books_model');//como segundo parametro podemos pasar el nombre con el queremos hacer referencia
 		$this->load->model('Author_model');//como segundo parametro podemos pasar el nombre con el queremos hacer referencia
 		$this->load->model('Editora_model');//como segundo parametro podemos pasar el nombre con el queremos hacer referencia
+		//$this->load->library("session");
+		$this->load->helper('form');
 	}
 
 	public function index(){
-		$this->load->helper('form');
+
+		
 		$offset = $this->input->get("page")??0;
 
 		$search = array();
@@ -107,15 +110,21 @@ class Books extends CI_Controller{
 //-------------------------------------------------------
 
 //-------------------------------------------------------
-		$gRecaptchaResponse = 
-		$remoteIp = 
+		
+		// ($this->session->has_userdata("event"))
+		// $this->session->set_flashdata('event', 'Automóvel ATUALIZADO com sucesso!');
+		//$this->session->has_userdata("event")
+		$gRecaptchaResponse = $this->input->post('g-recaptcha-response');
+		//var_dump($gRecaptchaResponse);
+		$remoteIp = $this->input->server("SERVER_ADDR");
 
 		$this->load->library('recaptchaResponse');
 		$this->load->library('recaptcha');
 
 		$this->recaptcha->init("6LecCSMUAAAAALH7sOUGR66ZYeCwRgMCXnOfwbMz");
 
-		$resp = $this->recaptcha->verify($gRecaptchaResponse, $remoteIp);
+		$resp = $this->recaptcha->verifyResponse($remoteIp, $gRecaptchaResponse);
+		var_dump($resp);
 // if ($resp->isSuccess()) {
 //     echo "Nao e uma maquina";
 // } else {
@@ -126,16 +135,17 @@ class Books extends CI_Controller{
 
 
 
-		if ($this->form_validation->run() === FALSE && !$resp->isSuccess()) {
-			//echo "hay un error";
+		if ($this->form_validation->run() === FALSE && $resp) {
+			echo "hay un error";
 			$data['editoras'] = $this->Editora_model->getAll(); 
 			$data['autores'] =$this->Author_model->getAll();
 			$data['active_menu'] = "books";
 			$data['content'] = "books/create";
+
 			$this->load->view('init', $data);	
 		//show create view
 		}else{
-			//echo "entra aqui porque no hay error";
+			echo "entra aqui porque no hay error";
 			$this->Books_model->create($this->input->post('isbn'), $this->input->post('title'), $this->input->post('data_publicacao'),$this->input->post('autor'),$this->input->post('editora'));
 
 			$data['active_menu'] = 'books';
@@ -188,13 +198,29 @@ class Books extends CI_Controller{
 					'required' => 'o campo %s é obrigatorio'
 					// 'in_list' => 'Ocorreu um erro com a base de dados',
 					)
+				),
+			array('field' => "g-recaptcha-response", 
+				'label' => 'Captcha',
+				'rules' => "required",//cumple la validacion
+				'errors' => array(
+					'required' => 'o campo %s é obrigatorio'
+					// 'in_list' => 'Ocorreu um erro com a base de dados',
+					)
 				)
 			);
+
+		$gRecaptchaResponse = $this->input->post('g-recaptcha-response');
+		$remoteIp = $this->input->server("SERVER_ADDR");
+		$this->load->library('recaptchaResponse');
+		$this->load->library('recaptcha');
+		$this->recaptcha->init("6LecCSMUAAAAALH7sOUGR66ZYeCwRgMCXnOfwbMz");
+		$resp = $this->recaptcha->verifyResponse($remoteIp, $gRecaptchaResponse);
+		// var_dump($resp);
 
 
 		$this->form_validation->set_rules($config);
 
-		if($this->form_validation->run() === FALSE){
+		if($this->form_validation->run() === FALSE && !$resp->success){
 			//Show create view
 			//	$data = array();
 			$data['editoras'] = $this->Editora_model->getAll(); 

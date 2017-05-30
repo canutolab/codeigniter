@@ -2,3 +2,13 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
+
+#Desativar assinatura do servidor
+ServerSignature Off
+
+#impedir acceso a ficheiros de configuracao
+
+
+#Impedir Browsing de diretorios
+Options -Indexes
+AllowOverride All

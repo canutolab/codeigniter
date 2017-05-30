@@ -21,6 +21,7 @@ class Welcome extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
+		$this->load->helper('form');
 	}
 
 	public function index(){
@@ -40,6 +41,13 @@ class Welcome extends CI_Controller {
 		$data['active_menu'] = "contact";
 		$this->load->view('init', $data);
 	}
+
+	public function login(){
+		$data['content'] = "login";
+		$data['active_menu'] = "login";
+		$this->load->view('init', $data);
+	}
+
 
 	
 }

@@ -45,7 +45,7 @@
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
+					<li><a href="<?php echo base_url("welcome/login") ?>">LogIn</a></li>
 				</ul>
 			</div>
 		</div>

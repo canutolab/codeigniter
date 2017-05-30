@@ -75,6 +75,7 @@
 		$('#form-new-book').submit(function(e) {
 			e.preventDefault(); 
 			var formDataa = new FormData($('#form-new-book'));
+
 			$.ajax({
 				type : "POST",
 				dataType:'json',
@@ -89,7 +90,8 @@
 						$('#form-new-book').trigger('reset');
 					}
 				}
-			});        
+			});
+						console.log(formDataa);        
 			return false; 
 		}); 
 	});

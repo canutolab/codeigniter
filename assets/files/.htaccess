@@ -1,0 +1,7 @@
+#Bloquear Acesso a ficheiros Com Pass
+<FilesMatch gp.zip>
+AuthName "Login"
+AuthType Basic
+AuthUserFile "C:\Users\Turma A\Documents\dev\xampp\htdocs\codeigniter\assets\files\.htpasswd"
+require valid-user
+</FilesMatch>
